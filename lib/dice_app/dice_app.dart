@@ -1,6 +1,4 @@
-
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class DiceApp extends StatelessWidget {
@@ -22,30 +20,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  int diceIndex = 0;
-  final List<String> images = [
-    '1.png',
-    '2.png',
-    '3.png',
-    '4.png',
-    '5.png',
-    '6.png',
-  ];
+  int _diceIndex = 0;
+  final List<String> images = ['1', '2', '3', '4', '5', '6'];
   final Random random = Random();
 
-  rollDice() {
-    setState(() {
-      diceIndex = random.nextInt(6);
-    });
-  }
+  void _rollDice() => setState(() {
+        _diceIndex = random.nextInt(6);
+      });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dice app'),
-        centerTitle: true, backgroundColor: Colors.black87,
+        centerTitle: true,
+        backgroundColor: Colors.black87,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -53,9 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: rollDice,
+              onTap: _rollDice,
               child: Image.asset(
-                'assets/images/dice/' + images[diceIndex],
+                /// 1- get image path using images [List]
+                // 'assets/images/dice/${images[_diceIndex]}.png',
+                /// 2- get image path using [_diceIndex] (without images [List])
+                'assets/images/dice/${_diceIndex + 1}.png',
               ),
             ),
           ),
